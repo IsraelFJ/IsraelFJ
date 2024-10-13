@@ -1,0 +1,284 @@
+package com.israelfalcao.appadivinhao;
+
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import java.util.Random;
+
+
+public class MainActivity extends AppCompatActivity {
+
+    private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayerSons;
+    private MediaPlayer mediaPlayerZelda;
+    private MediaPlayer mediaPlayerError;
+
+    private int pontos = 1 ;
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            mediaPlayer = MediaPlayer.create(this, R.raw.protogem);
+            mediaPlayer.setLooping(true);
+            mediaPlayer.start();
+            
+
+
+
+
+            return insets;
+        });
+    }
+    private void tocarSomZelda() {
+
+        if (mediaPlayerZelda != null) {
+            mediaPlayerZelda.release();
+        }
+
+        mediaPlayerZelda = MediaPlayer.create(this, R.raw.zelda);
+        if (mediaPlayerZelda != null) {
+            mediaPlayerZelda.start();
+            mediaPlayerZelda.setOnCompletionListener(mp -> {
+                mp.release();
+            });
+        }
+    }
+    private void tocarSomError() {
+
+        if (mediaPlayerError != null) {
+            mediaPlayerError.release();
+        }
+
+        mediaPlayerError = MediaPlayer.create(this, R.raw.error);
+        if (mediaPlayerError != null) {
+            mediaPlayerError.start();
+            mediaPlayerError.setOnCompletionListener(mp -> {
+                mp.release();
+            });
+        }
+    }
+
+    private void tocarSom(int somId) {
+
+        if (mediaPlayerSons != null) {
+            mediaPlayerSons.release();
+        }
+
+        mediaPlayerSons = MediaPlayer.create(this, somId);
+        if (mediaPlayerSons != null) {
+            mediaPlayerSons.start();
+            mediaPlayerSons.setOnCompletionListener(mp -> {
+                mp.release();
+            });
+        }
+    }
+
+
+    public void numeroUm(View view) {
+        verificarGanhador(1);
+        ImageView jogador = findViewById(R.id.numeroJogador);
+        jogador.setImageResource(R.drawable.number1);
+        tocarSom(R.raw.stop);
+
+    }
+
+    public void numeroDois(View view) {
+        verificarGanhador(2);
+        ImageView jogador = findViewById(R.id.numeroJogador);
+        jogador.setImageResource(R.drawable.number2);
+        tocarSom(R.raw.stop);
+    }
+
+    public void numeroTres(View view) {
+        verificarGanhador(3);
+        ImageView jogador = findViewById(R.id.numeroJogador);
+        jogador.setImageResource(R.drawable.number3);
+        tocarSom(R.raw.stop);
+    }
+
+    public void numeroQuatro(View view) {
+        verificarGanhador(4);
+        ImageView jogador = findViewById(R.id.numeroJogador);
+        jogador.setImageResource(R.drawable.number4);
+        tocarSom(R.raw.stop);
+    }
+
+    public void numeroCinco(View view) {
+        verificarGanhador(5);
+        ImageView jogador = findViewById(R.id.numeroJogador);
+        jogador.setImageResource(R.drawable.number5);
+        tocarSom(R.raw.stop);
+    }
+
+    public void numeroSeis(View view) {
+        verificarGanhador(6);
+        ImageView jogador = findViewById(R.id.numeroJogador);
+        jogador.setImageResource(R.drawable.number6);
+        tocarSom(R.raw.stop);
+    }
+
+    public void numeroSete(View view) {
+        verificarGanhador(7);
+        ImageView jogador = findViewById(R.id.numeroJogador);
+        jogador.setImageResource(R.drawable.number7);
+        tocarSom(R.raw.stop);
+    }
+
+    public void numeroOito(View view) {
+        verificarGanhador(8);
+        ImageView jogador = findViewById(R.id.numeroJogador);
+        jogador.setImageResource(R.drawable.number8);
+        tocarSom(R.raw.stop);
+    }
+
+    public void numeroNove(View view) {
+        verificarGanhador(9);
+        ImageView jogador = findViewById(R.id.numeroJogador);
+        jogador.setImageResource(R.drawable.number9);
+        tocarSom(R.raw.stop);
+    }
+
+    public void numeroZero(View view) {
+        verificarGanhador(0);
+        ImageView jogador = findViewById(R.id.numeroJogador);
+        jogador.setImageResource(R.drawable.number0);
+        tocarSom(R.raw.stop);
+
+    }
+
+   private int gerarEscolhaDoApp() {
+        int numeroAleatorio = new Random().nextInt(11);
+        ImageView imageApp = findViewById(R.id.sorteio);
+        imageApp.setImageResource(R.drawable.interrogacao);
+        int escolhaApp = numeroAleatorio;
+
+
+        switch (escolhaApp) {
+
+            case 0:
+                imageApp.setImageResource(R.drawable.number0);
+
+                break;
+            case 1:
+                imageApp.setImageResource(R.drawable.number1);
+                break;
+            case 2:
+                imageApp.setImageResource(R.drawable.number2);
+                break;
+            case 3:
+                imageApp.setImageResource(R.drawable.number3);
+                break;
+            case 4:
+                imageApp.setImageResource(R.drawable.number4);
+                break;
+            case 5:
+                imageApp.setImageResource(R.drawable.number5);
+                break;
+            case 6:
+                imageApp.setImageResource(R.drawable.number6);
+                break;
+            case 7:
+                imageApp.setImageResource(R.drawable.number7);
+                break;
+            case 8:
+                imageApp.setImageResource(R.drawable.number8);
+                break;
+            case 9:
+                imageApp.setImageResource(R.drawable.number9);
+                break;
+        }
+        return escolhaApp;
+
+    }
+
+   private void verificarGanhador(int escolhaJogador) {
+       int escolhaApp = gerarEscolhaDoApp();
+       TextView textoResultado = findViewById(R.id.textresultado);
+       TextView Paramuito = findViewById(R.id.textTohigh);
+       TextView Parapouco = findViewById(R.id.textolow);
+       TextView contador = findViewById(R.id.contadorPontos);
+       ImageView inter = findViewById(R.id.sorteio);
+
+
+
+           if (escolhaJogador == escolhaApp) {
+
+               textoResultado.setText("YOU GOT IT RIGHT!!!!!  :)");
+               Paramuito.setText("");
+               Parapouco.setText("");
+               tocarSomZelda();
+               contador.setText(""+pontos);
+               pontos++;
+
+           } else if (escolhaJogador > escolhaApp) {
+               Paramuito.setText("TO HIGH!");
+               Parapouco.setText("");
+               textoResultado.setText("YOU MISSED IT! :(");
+               inter.setImageResource(R.drawable.interrogacao);
+               tocarSomError();
+
+           }  else {
+               Parapouco.setText("TO LOW!");
+               Paramuito.setText("");
+               textoResultado.setText("YOU MISSED IT! :(");
+               inter.setImageResource(R.drawable.interrogacao);
+
+               tocarSomError();
+
+           }
+         /*  new android.os.Handler().postDelayed(() -> {
+
+               Paramuito.setText("");
+               Parapouco.setText("");
+
+
+           }, 5000);*/
+
+
+
+   }
+
+    protected void onPause() {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
+}
+
